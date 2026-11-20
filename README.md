@@ -62,6 +62,7 @@ school-inventory-system/
 │   └── package.json
 ├── .github/workflows/ci.yml
 ├── docker-compose.yml
+├── render.yaml
 ├── .gitignore
 └── README.md
 ```
@@ -190,6 +191,8 @@ docker compose up --build
 - Backend: `http://localhost:5000`
 
 `docker-compose.yml` reads `backend/.env` and passes `VITE_API_BASE_URL` as a build argument. In production, put both services behind a TLS-terminating reverse proxy so all traffic is served over HTTPS, as required by the research paper. For a remote deployment, change `CLIENT_ORIGIN` and `VITE_API_BASE_URL` to the public HTTPS URLs before building.
+
+For a quick public deployment, `render.yaml` is a Render Blueprint defining the API web service and frontend static site. Push the repository to GitHub, choose **New Blueprint Instance** in Render, select this repository, and enter the MongoDB Atlas `MONGODB_URI` when prompted. Render generates `JWT_SECRET` and provides HTTPS URLs; if your service names differ, update `CLIENT_ORIGIN` and `VITE_API_BASE_URL` in the Render dashboard. After deployment, open the Render Shell for the API service and run `npm run seed` once to create the first custodian.
 
 ## 7. Testing
 

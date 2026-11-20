@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: essu-inventory-api
+    runtime: node
+    rootDir: backend
+    region: singapore
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 12h
+      - key: CLIENT_ORIGIN
+        value: https://essu-inventory-web.onrender.com
+
+  - type: web
+    name: essu-inventory-web
+    runtime: static
+    rootDir: frontend
+    region: singapore
+    plan: free
+    buildCommand: npm install && npm run build
+    staticBuildPath: dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://essu-inventory-api.onrender.com/api
