@@ -9,6 +9,7 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "seed": "node scripts/seed.js",
+    "demo-data": "node scripts/demo-data.js",
     "test": "node --test tests/*.test.js"
   },
   "engines": {
