@@ -194,6 +194,8 @@ docker compose up --build
 
 For a quick public deployment, `render.yaml` is a Render Blueprint defining the API web service and frontend static site. Push the repository to GitHub, choose **New Blueprint Instance** in Render, select this repository, and enter the MongoDB Atlas `MONGODB_URI` when prompted. Render generates `JWT_SECRET` and provides HTTPS URLs; if your service names differ, update `CLIENT_ORIGIN` and `VITE_API_BASE_URL` in the Render dashboard. After deployment, open the Render Shell for the API service and run `npm run seed` once to create the first custodian.
 
+The frontend is also published with GitHub Pages at `https://natherroman14.github.io/school-inventory-system/` using `.github/workflows/pages.yml`. For a no-hosting demo, the repository variable `VITE_API_BASE_URL` points to a temporary tunnel to the local API (`https://814756ae18ba17.app.lhr.life/api`). The Pages site works only while that tunnel and the local backend remain running; the tunnel domain is random and rotates when restarted. Update the repository variable and rerun the Pages workflow if the tunnel URL changes.
+
 ## 7. Testing
 
 Automated integration tests use an in-memory MongoDB instance, so no Atlas credentials are needed:
